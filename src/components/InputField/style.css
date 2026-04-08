@@ -1,0 +1,36 @@
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.form-group input {
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus {
+  border-color: #00995d;
+  box-shadow: 0 0 0 3px rgba(0, 153, 93, 0.1);
+}
+
+.form-group input.input-error {
+  border-color: #dc2626;
+}
+
+.error-message {
+  font-size: 0.8rem;
+  color: #dc2626;
+  min-height: 1.2em;
+}

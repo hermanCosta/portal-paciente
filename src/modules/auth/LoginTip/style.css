@@ -1,0 +1,9 @@
+.login-hint {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #6b7280;
+  padding: 12px;
+  background: #f5f7fa;
+  border-radius: 8px;
+}
