@@ -6,10 +6,13 @@ import { usePaciente } from "../../../contexts/PacienteContext";
 import "./style.css";
 
 function LoginForm() {
+    const [formData, setFormData] = useState({carteirinha: "", senha: ""});
     const  {login, error} = usePaciente();
-    const  [carteirinha, setCarteirinha] = useState("");
-    const  [senha, setSenha] = useState("");   
 
+const handleChange = (e) => {
+  const {id, value} = e.target;
+  setFormData((prev) => ({ ...prev, [id]: value}))
+}
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,8 +29,8 @@ function LoginForm() {
           type="text"
           placeholder="Digite sua carteirinha"
           label="Carteirinha"
-          value={carteirinha}
-          onChange={(e) => setCarteirinha(e.target.value)}
+          value={formData.carteirinha}
+          onChange= {handleChange}
         />
 
         <InputField
@@ -35,8 +38,8 @@ function LoginForm() {
           type="password"
           placeholder="Digite sua senha"
           label="Senha"
-          value={senha}
-          onChange={(e) => setSenha(e.target.value)}
+          value={formData.senha}
+          onChange={handleChange}
         />
 
         {error && <div className="error-message" id="login-error"></div>}

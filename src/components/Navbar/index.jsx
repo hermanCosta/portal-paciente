@@ -13,7 +13,7 @@ const NAV_LINKS = [
 const navlinkClass = ({ isActive }) => isActive ? 'nav-link nav-link--active' : 'nav-link';
 
 function NavBar() {
-    const {paciente, logout} = usePaciente();
+    const {dados, logout} = usePaciente();
 
     return (
         <header className="navbar">
@@ -32,7 +32,7 @@ function NavBar() {
 
             <div className='navbar-actions'>
                 <button className='navbar-bell' title='Notificações'>🔔</button>
-                <span className='navbar-user'> {paciente?.nome}</span>
+                <span className='navbar-user'> {dados.paciente?.nome}</span>
                 <button className='navbar-logout' onClick={() => logout()}>Sair</button>
             </div>
         </header>

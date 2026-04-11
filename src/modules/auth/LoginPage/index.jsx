@@ -3,7 +3,6 @@ import LoginForm from '../LoginForm/Index';
 import LoginHeader from '../LoginHeader';
 import LoginTip from '../LoginTip';
 import './style.css';
-///Users/hermancosta/dev/reactTraining/portal-paciente/src/contexts/PacienteContext.jsx
 
 function LoginPage() {
     const { paciente } = usePaciente();

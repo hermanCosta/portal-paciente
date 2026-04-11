@@ -1,9 +1,11 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, use, useContext, useState } from "react";
 import { post } from "../services/api";
 
 const PacienteContext = createContext(null);
+const dadosIniciais = {paciente: null, exames: [], consultas: []};
 
 export const PacienteProvider = ({ children }) => {
+    const [dados, setDados] = useState(dadosIniciais);
     const [paciente, setPaciente] = useState(null);
     const [error, setError] = useState(null);
 
@@ -11,9 +13,12 @@ export const PacienteProvider = ({ children }) => {
         setError(null);
 
         try {
-        const data = await post("/login", { carteirinha, senha });
-        console.log("Login bem-sucedido:", data);
-        setPaciente(data);
+            const paciente = await post("/login", { carteirinha, senha });            
+            const exames = await get(`/exames?pacienteId=${paciente.id}`);
+            const consultas = await get(`/consultas?pacienteId=${paciente.id}`);                            
+            
+            console.log("Login bem-sucedido:", data);
+            setDados({paciente, exames, consultas});
       } catch (err) {       
         setError("Ocorreu um erro ao tentar fazer login. Por favor, tente novamente.");
       }
@@ -24,7 +29,7 @@ export const PacienteProvider = ({ children }) => {
     };
 
     return (
-        <PacienteContext.Provider value={{paciente, login, logout, error}}>
+        <PacienteContext.Provider value={{dados, login, logout, error}}>
             {children}
         </PacienteContext.Provider>
     );

@@ -4,32 +4,12 @@ import { get } from "../../services/api";
 import { usePaciente } from "../../contexts/PacienteContext";
 
 function DashBoardPage() {
-  const { paciente } = usePaciente();
+  const { dados } = usePaciente();
 
-  const [consultas, setConsultas] = useState([]);
-  const [exames, setExames] = useState([]);
+  const { paciente, consultas, exames} = dados;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {     
-        const consultasResponse = await get(`/consultas?pacienteId=${paciente.id}`);
-        setConsultas(consultasResponse) || [];
 
-        const examesResponse = await get(`/exames?pacienteId=${paciente.id}`);
-        setExames(examesResponse) || [];
-
-        console.log("Consultas:", consultasResponse.data);
-        console.log("Exames:", examesResponse.data);
-      } catch (error) {
-        console.error("Erro ao buscar dados:", error);
-      }
-    };
-    
-    fetchData();
-
-  }, []);
-
-  if(!exames.length || !consultas.length) {
+  if(!paciente || !exames.length || !consultas.length) {
     return <LoadingSpinner />;
   }
 
