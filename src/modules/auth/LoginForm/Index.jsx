@@ -8,15 +8,15 @@ import "./style.css";
 function LoginForm() {
     const [formData, setFormData] = useState({carteirinha: "", senha: ""});
     const  {login, error} = usePaciente();
-
-const handleChange = (e) => {
-  const {id, value} = e.target;
-  setFormData((prev) => ({ ...prev, [id]: value}))
-}
+    
+  const handleChange = (e) => {
+    const {id, value} = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value}))
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await login(carteirinha, senha);     
+    await login(formData.carteirinha, formData.senha);     
   };   
 
   return (
@@ -42,7 +42,11 @@ const handleChange = (e) => {
           onChange={handleChange}
         />
 
-        {error && <div className="error-message" id="login-error"></div>}
+        {error && (
+          <div className="error-message" id="login-error">
+            {error}
+          </div>
+        )}
 
         <button type="submit" className="btn-primary">Entrar</button>
     </form>

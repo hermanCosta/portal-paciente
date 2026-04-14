@@ -1,7 +1,32 @@
+import { useState } from "react";
+import ConsultasTable from "./ConsultasTable.jsx";
+
+import { usePaciente } from "../../../contexts/PacienteContext";
+
 function ConsultasPage() {
+  const { dados, atualizarConsultas } = usePaciente();
+  const { consultas } = dados;
+  const [carregando, setCarregando] = useState(false);
+
+  const handleAtualizar = async () => {
+    setCarregando(true);
+    await atualizarConsultas();
+    setCarregando(false);
+  };
+
   return (
     <div>
-      <h1>ConsultasPage</h1>
+      <h1>Consultas</h1>
+      <button onClick={handleAtualizar} disabled={carregando}>
+        {carregando ? 'Atualizando...' : 'Atualizar dados'}
+      </button>
+      {
+        consultas && consultas.length > 0 ? (
+          <ConsultasTable consultas={consultas} />
+        ) : (
+          <p>Não há consultas disponíveis.</p>
+        )
+      }
     </div>
   );
 }

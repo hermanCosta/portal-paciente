@@ -1,11 +1,8 @@
-import { useEffect, useState } from "react";
 import LoadingSpinner from "../../components/LoadSpinner";
-import { get } from "../../services/api";
 import { usePaciente } from "../../contexts/PacienteContext";
 
 function DashBoardPage() {
   const { dados } = usePaciente();
-
   const { paciente, consultas, exames} = dados;
 
 
@@ -35,22 +32,6 @@ function DashBoardPage() {
           </div>
         </div>
       )}       
-
-      {exames && exames.length > 0 && (
-        <div> 
-          <h3>Exames Recentes</h3>
-          <div>
-            {exames.slice(0, 3).map((exame) => (
-              <div key={exame.id}>                
-
-                <strong> {exame.tipo}</strong>                                
-                <span> | {exame.data}</span>
-                <span> | {exame.status}</span>
-              </div>
-            ))}
-          </div>
-        </div> 
-      )}              
     </div>
   );
 }

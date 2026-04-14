@@ -5,7 +5,7 @@ import LoginTip from '../LoginTip';
 import './style.css';
 
 function LoginPage() {
-    const { paciente } = usePaciente();
+    const { paciente } = usePaciente(); 
     return (
         <main className="login-page" id="login-page">
             <div className="login-card" >
